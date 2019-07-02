@@ -4,14 +4,18 @@ import datetime
 import time
 
 
-score_file_name = "score4.txt"
+score_file_name = "score.txt"
 
 player_name =input("Vnesite vase ime: ")
 
-with open(score_file_name, "r") as score_file:
-    score_list = json.loads(score_file.read())
-    score_list = sorted(score_list, key=lambda k: k["score"])
-    print(f"Najboljsi trije: {score_list[:3]}")
+try:
+    with open(score_file_name, "r") as score_file:
+        score_list = json.loads(score_file.read())
+        score_list = sorted(score_list, key=lambda k: k["score"])
+        print(f"Najboljsi trije: {score_list[:3]}")
+except(FileNotFoundError, ValueError):
+    print("To je vasa prva igra.")
+    score_list = []
 
 random_stevilo = random.randint(1, 100)
 
